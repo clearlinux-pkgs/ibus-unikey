@@ -4,7 +4,7 @@
 #
 Name     : ibus-unikey
 Version  : 0.6.1
-Release  : 1
+Release  : 2
 URL      : https://github.com/vn-input/ibus-unikey/archive/0.6.1.tar.gz
 Source0  : https://github.com/vn-input/ibus-unikey/archive/0.6.1.tar.gz
 Summary  : IBus module for Vietnamese Keyboard
