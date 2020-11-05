@@ -4,10 +4,10 @@
 #
 Name     : ibus-unikey
 Version  : 0.6.1
-Release  : 2
+Release  : 3
 URL      : https://github.com/vn-input/ibus-unikey/archive/0.6.1.tar.gz
 Source0  : https://github.com/vn-input/ibus-unikey/archive/0.6.1.tar.gz
-Summary  : IBus module for Vietnamese Keyboard
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0 LGPL-2.0
 Requires: ibus-unikey-data = %{version}-%{release}
@@ -25,7 +25,7 @@ BuildRequires : pkgconfig(x11)
 %description
 IBus-Unikey IME
 ---------------
-Author: LÃª Quá»c Tuáº¥n <mr.lequoctuan@gmail.com>
+Author: Lê Quốc Tuấn <mr.lequoctuan@gmail.com>
 Home: http://ibus-unikey.googlecode.com
 License: GNU GENERAL PUBLIC LICENSE v3
 ---------------------------------------------
@@ -68,33 +68,35 @@ locales components for the ibus-unikey package.
 
 %prep
 %setup -q -n ibus-unikey-0.6.1
+cd %{_builddir}/ibus-unikey-0.6.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1559101379
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604616023
+export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto -std=gnu++98"
 %autogen --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1559101379
+export SOURCE_DATE_EPOCH=1604616023
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ibus-unikey
-cp COPYING %{buildroot}/usr/share/package-licenses/ibus-unikey/COPYING
-cp ukengine/COPYING %{buildroot}/usr/share/package-licenses/ibus-unikey/ukengine_COPYING
+cp %{_builddir}/ibus-unikey-0.6.1/COPYING %{buildroot}/usr/share/package-licenses/ibus-unikey/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/ibus-unikey-0.6.1/ukengine/COPYING %{buildroot}/usr/share/package-licenses/ibus-unikey/bf50bac24e7ec325dbb09c6b6c4dcc88a7d79e8f
 %make_install
 %find_lang ibus-unikey
 
@@ -115,8 +117,8 @@ cp ukengine/COPYING %{buildroot}/usr/share/package-licenses/ibus-unikey/ukengine
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/ibus-unikey/COPYING
-/usr/share/package-licenses/ibus-unikey/ukengine_COPYING
+/usr/share/package-licenses/ibus-unikey/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+/usr/share/package-licenses/ibus-unikey/bf50bac24e7ec325dbb09c6b6c4dcc88a7d79e8f
 
 %files locales -f ibus-unikey.lang
 %defattr(-,root,root,-)
